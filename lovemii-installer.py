@@ -372,10 +372,14 @@ if __name__ == "__main__":
     eww open top
     picom --blur-method dual_kawase --blur-strength 20 -b
     
-    feh --bg-scale $HOME/Imagens/wallpaper.png &
+    feh --bg-scale $HOME/Imagens/wallpaper.jpg &
     xbindkeys
     mpd & disown
     """
+    print("downloading default image bg...")
+    sp.call(["mkdir", "-p", f"{home.as_posix()}/Imagens"])
+    try: sp.call(["wget", "-O", f"{home.as_posix()}/Imagens/wallpaper.jpg", "https://hdqwalls.com/wallpapers/linux-tux-minimalism-4k-42.jpg"])
+    except: install_package("wget"); sp.call(["wget", "-O", f"{home.as_posix()}/Imagens/wallpaper.jpg", "https://hdqwalls.com/wallpapers/linux-tux-minimalism-4k-42.jpg"])
     print("setting autostart.sh...")
     autostart.write(autostart_script)
     print("install done!")
